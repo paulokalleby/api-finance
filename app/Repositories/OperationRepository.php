@@ -21,11 +21,10 @@ class OperationRepository
     {
         return  $this->operation->when($filters, function (Builder $query) use ($filters) {
 
-            if ( isset($filters['name']) ) {
+            if ( isset($filters['account_id']) ) $query->whereAccountId($filters['account_id']);
 
-                $query->where('name', 'LIKE', "%{$filters['name']}%");
+            if ( isset($filters['name']) ) $query->where('name', 'LIKE', "%{$filters['name']}%");
 
-            }
                 
         })->paginate();
     }

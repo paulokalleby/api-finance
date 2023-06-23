@@ -18,13 +18,11 @@ class UserRepository
     {
         return  $this->user->when($filters, function (Builder $query) use ($filters) {
 
-            if ( isset($filters['name']) )
-                $query->where('name', 'LIKE', "%{$filters['name']}%");
+            if ( isset($filters['name']) ) $query->where('name', 'LIKE', "%{$filters['name']}%");
 
-            if ( isset($filters['active']) ) 
-                $query->whereActive($filters['active']);
-            else 
-                $query->whereActive(true); 
+            if ( isset($filters['active']) ) $query->whereActive($filters['active']);
+            
+            else $query->whereActive(true); 
                 
         })->paginate();
     }

@@ -18,11 +18,7 @@ class AccountRepository
     {
         return  $this->account->when($filters, function (Builder $query) use ($filters) {
 
-            if ( isset($filters['name']) ) {
-
-                $query->where('name', 'LIKE', "%{$filters['name']}%");
-
-            }
+            if ( isset($filters['name']) ) $query->where('name', 'LIKE', "%{$filters['name']}%");
         
         })->paginate();
     }
