@@ -58,10 +58,17 @@ class UserRepository
     {
         $user = $this->user->findOrFail($id);
 
+        if ( $user->isSuperAdmin() ) abort(403, 'not authorized');
+
         $user->delete();
 
         return response()->json([
             'message' => 'success'
         ]);
+    }
+
+    public function totalUsers()
+    {
+        return  $this->user->whereActive(true)->count();
     }
 }

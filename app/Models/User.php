@@ -51,4 +51,9 @@ class User extends Authenticatable implements CanResetPassword
         return $this->hasMany(Account::class);
     }
 
+    public function isSuperAdmin()
+    {
+        return in_array($this->email, config('acl.admins'));
+    }
+
 }

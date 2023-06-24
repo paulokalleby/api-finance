@@ -55,4 +55,9 @@ class AccountRepository
             'message' => 'success'
         ]);
     }
+
+    public function totalAccounts()
+    {
+        return  $this->account->count();
+    }
 }

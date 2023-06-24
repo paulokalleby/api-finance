@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\{
 
 use App\Http\Controllers\{
     AccountController,
+    DashboardController,
     OperationController,
     UserController,
 };
@@ -31,7 +32,10 @@ Route::prefix('auth')->group(function () {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/accounts', AccountController::class);
     Route::apiResource('/operations', OperationController::class);
-    Route::apiResource('/users', UserController::class)->middleware('admin');
+    Route::middleware(['admin'])->group(function () {
+        Route::apiResource('/dashboard', DashboardController::class)->only('index');
+        Route::apiResource('/users', UserController::class);
+    });
 });
 
 Route::get('/', function () {

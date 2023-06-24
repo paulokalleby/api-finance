@@ -115,4 +115,9 @@ class OperationRepository
             'message' => 'success'
         ]);
     }
+
+    public function totalOperations()
+    {
+        return  $this->operation->count();
+    }
 }
